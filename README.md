@@ -34,7 +34,6 @@ This is an example of how lazy loaded paged table can be implemented in Vaadin. 
 public class Agreement {
 
     private int id;
-
     private String name;
 
     public Agreement(int id, String name) {
@@ -48,7 +47,6 @@ public class Agreement {
 
 ```java
 public class AgreementSearchCriteria extends AbstractSearchCriteria {
-
 }
 ```
 
@@ -62,8 +60,8 @@ public class AgreementDAO implements DAO<Agreement> {
 
     public AgreementDAO() {
         try {
-        try {
-        Class.forName(driver).newInstance();
+            try {
+                Class.forName(driver).newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -121,26 +119,25 @@ public class AgreementDAO implements DAO<Agreement> {
 ```
 
 ```java
-public class MyVaadinUI extends UI
-{
+public class MyVaadinUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        final VerticalLayout layout = new VerticalLayout();
+        VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
         setContent(layout);
 
         PagedTable table = new PagedTable("PagedTable Example");
-        table.setWidth("500px");
         ControlsLayout controls = table.createControls();
-        controls.setWidth("500px");
 
         LazyBeanContainer container = new LazyBeanContainer(Agreement.class, new AgreementDAO(), new AgreementSearchCriteria());
         table.setContainerDataSource(container);
 
+        table.setWidth("500px");
+        controls.setWidth("500px");
+
         layout.addComponent(table);
         layout.addComponent(controls);
-        setContent(layout);
     }
 }
 ```

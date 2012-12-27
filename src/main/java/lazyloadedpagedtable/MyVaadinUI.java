@@ -16,21 +16,21 @@ public class MyVaadinUI extends UI
 
     @Override
     protected void init(VaadinRequest request) {
-        final VerticalLayout layout = new VerticalLayout();
+        VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
         setContent(layout);
 
         PagedTable table = new PagedTable("PagedTable Example");
-        table.setWidth("500px");
         ControlsLayout controls = table.createControls();
-        controls.setWidth("500px");
 
         LazyBeanContainer container = new LazyBeanContainer(Agreement.class, new AgreementDAO(), new AgreementSearchCriteria());
         table.setContainerDataSource(container);
 
+        table.setWidth("500px");
+        controls.setWidth("500px");
+
         layout.addComponent(table);
         layout.addComponent(controls);
-        setContent(layout);
     }
 
 }
