@@ -4,6 +4,10 @@ This is an example of how lazy loaded paged table can be implemented in Vaadin. 
 
 ![Paged Table](http://qiiip.org/github/lazy-loaded-paged-table/lazy-loaded-paged-table-example.png)
 
+This showcase application uses these two add-ons:
+[forked PagedTable](https://github.com/ondrej-kvasnovsky/PagedTable)
+[LazyContainer](https://github.com/ondrej-kvasnovsky/lazy-container)
+
 
 ```xml
 <repository>
