@@ -1,58 +1,16 @@
-# Lazy Loaded Paged Table
+package lazyloadedpagedtable;
 
-This is an example of how lazy loaded paged table can be implemented in Vaadin. Lazy loaded paged table is table where you request displaying of each page (there is no scrollabar) and data for each page are fetched lazily from database. Lazy loaded table can look like this.
+import org.vaadin.addons.lazycontainer.DAO;
+import org.vaadin.addons.lazycontainer.OrderByColumn;
+import org.vaadin.addons.lazycontainer.SearchCriteria;
 
-![Paged Table](http://qiiip.org/github/lazy-loaded-paged-table/lazy-loaded-paged-table-example.png)
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-
-```xml
-<repository>
-    <id>qiiip-repo</id>
-    <url>http://qiiip.org/mavenRepo</url>
-</repository>
-```
-
-```xml
-<dependency>
-    <groupId>org.vaadin.addons</groupId>
-    <artifactId>pagedtable</artifactId>
-    <version>0.6.7</version>
-</dependency>
-<dependency>
-    <groupId>org.vaadin.addons</groupId>
-    <artifactId>lazy-container</artifactId>
-    <version>0.0.2</version>
-</dependency>
-<dependency>
-    <groupId>hsqldb</groupId>
-    <artifactId>hsqldb</artifactId>
-    <version>1.8.0.10</version>
-</dependency>
-```
-
-```java
-public class Agreement {
-
-    private int id;
-
-    private String name;
-
-    public Agreement(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    // getters and setters
-}
-```
-
-```java
-public class AgreementSearchCriteria extends AbstractSearchCriteria {
-
-}
-```
-
-```java
+/**
+ * @author Ondrej Kvasnovsky
+ */
 public class AgreementDAO implements DAO<Agreement> {
 
     private String driver = "org.hsqldb.jdbcDriver";
@@ -62,8 +20,8 @@ public class AgreementDAO implements DAO<Agreement> {
 
     public AgreementDAO() {
         try {
-        try {
-        Class.forName(driver).newInstance();
+            try {
+                Class.forName(driver).newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -118,29 +76,3 @@ public class AgreementDAO implements DAO<Agreement> {
         return null;
     }
 }
-```
-
-```java
-public class MyVaadinUI extends UI
-{
-
-    @Override
-    protected void init(VaadinRequest request) {
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setMargin(true);
-        setContent(layout);
-
-        PagedTable table = new PagedTable("PagedTable Example");
-        table.setWidth("500px");
-        ControlsLayout controls = table.createControls();
-        controls.setWidth("500px");
-
-        LazyBeanContainer container = new LazyBeanContainer(Agreement.class, new AgreementDAO(), new AgreementSearchCriteria());
-        table.setContainerDataSource(container);
-
-        layout.addComponent(table);
-        layout.addComponent(controls);
-        setContent(layout);
-    }
-}
-```
