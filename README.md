@@ -11,13 +11,7 @@ This is an example of how lazy loaded paged table can be implemented in Vaadin. 
 
 ## Example code snippets
 
-```xml
-<repository>
-    <id>qiiip-repo</id>
-    <url>http://qiiip.org/mavenRepo</url>
-</repository>
-```
-
+### Maven dependencies
 ```xml
 <dependency>
     <groupId>org.vaadin.addons</groupId>
@@ -36,6 +30,17 @@ This is an example of how lazy loaded paged table can be implemented in Vaadin. 
 </dependency>
 ```
 
+```xml
+<repository>
+    <id>qiiip-repo</id>
+    <url>http://qiiip.org/mavenRepo</url>
+</repository>
+```
+
+### Domain object
+
+We will use agreement entity for this example.
+
 ```java
 public class Agreement {
 
@@ -51,10 +56,20 @@ public class Agreement {
 }
 ```
 
+### Search criteria
+
+We made simple search criteria that we might enhance for e.g. fields that would represent user's input.
+
 ```java
 public class AgreementSearchCriteria extends AbstractSearchCriteria {
 }
 ```
+
+### DAO (Data Access Object)
+
+Here we make simple DAO that will use in-memory HSQLDB database. This is actually the biggest part of the example code (it is just faking database so we can use SQL queries as demonstrative showcase).
+
+Note: it is just example code to show how we could implement DAO interface.
 
 ```java
 public class AgreementDAO implements DAO<Agreement> {
@@ -123,6 +138,10 @@ public class AgreementDAO implements DAO<Agreement> {
     }
 }
 ```
+
+### UI layout
+
+We create layout, table, controls and container. Then we put it together and we can run the application in browser.
 
 ```java
 public class MyVaadinUI extends UI {
