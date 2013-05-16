@@ -2,7 +2,7 @@
 
 This is an example of how lazy loaded paged table can be implemented in Vaadin. Lazy loaded paged table is table where you request displaying of each page (there is no scrollabar) and data for each page are fetched lazily from database. Lazy loaded table can look like this.
 
-![Paged Table](http://qiiip.org/github/lazy-loaded-paged-table/lazy-loaded-paged-table-example.png)
+![Paged Table](http://gerades.savana.cz/github/lazy-loaded-paged-table/lazy-loaded-paged-table-example.png)
 
 ## Used add-ons
 
